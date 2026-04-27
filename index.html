@@ -23,11 +23,11 @@
 <body>
     <div id="spine-container"></div>
 
-    <a-scene mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/examples/image-tracking/assets/card-example/card.mind; uiLoading:yes; uiScanning:yes;" 
-             vr-mode-ui="enabled: false" 
-             device-orientation-permission-ui="enabled: true"
-             color-space="sRGB"
-             renderer="colorManagement: true, physicallyCorrectLights">
+    <a-scene 
+    mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/examples/image-tracking/assets/card-example/card.mind; autoStart: true;" 
+    vr-mode-ui="enabled: false" 
+    device-orientation-permission-ui="enabled: true"
+    embedded>
         
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
         <a-entity id="ar-target" mindar-image-target="targetIndex: 0"></a-entity>
