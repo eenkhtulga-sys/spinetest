@@ -2,8 +2,10 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+    
     <script src="https://unpkg.com/@esotericsoftware/spine-player@4.1/dist/iife/spine-player.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/@esotericsoftware/spine-player@4.1/dist/spine-player.css">
 
@@ -13,7 +15,7 @@
             width: 300px; height: 300px;
             position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 100; display: none; /* Эхлээд нууна */
+            z-index: 100; display: none;
             pointer-events: none;
         }
     </style>
@@ -21,8 +23,11 @@
 <body>
     <div id="spine-container"></div>
 
-    <a-scene mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/examples/image-tracking/assets/card-example/card.mind;" 
-             vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+    <a-scene mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/examples/image-tracking/assets/card-example/card.mind; uiLoading:yes; uiScanning:yes;" 
+             vr-mode-ui="enabled: false" 
+             device-orientation-permission-ui="enabled: true"
+             color-space="sRGB"
+             renderer="colorManagement: true, physicallyCorrectLights">
         
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
         <a-entity id="ar-target" mindar-image-target="targetIndex: 0"></a-entity>
@@ -34,6 +39,7 @@
         let player = null;
 
         targetEl.addEventListener("targetFound", () => {
+            console.log("Зураг олдлоо");
             spineDiv.style.display = "block";
             if (!player) {
                 player = new spine.SpinePlayer("spine-container", {
