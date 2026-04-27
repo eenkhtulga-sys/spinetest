@@ -73,29 +73,15 @@
             spineDiv.style.display = "block";
             if (!player) {
                 player = new spine.SpinePlayer("spine-container", {
-                    jsonUrl: "https://esotericsoftware.com/files/examples/4.1/spineboy/export/spineboy-pro.json",
-                    atlasUrl: "https://esotericsoftware.com/files/examples/4.1/spineboy/export/spineboy-pro.atlas",
-                    animation: "run",
+                    jsonUrl: "https://esotericsoftware.com/files/examples/4.1/raptor/export/raptor-pro.json",
+                    atlasUrl: "https://esotericsoftware.com/files/examples/4.1/raptor/export/raptor-pro.atlas",
+                    animation: "walk",
                     alpha: true,
                     backgroundColor: "#00000000",
                     showControls: false
                 });
             }
         });
-
-        if (!player) {
-            player = new spine.SpinePlayer("spine-container", {
-                // Spine-ийн бэлэн демо файлуудыг jsDelivr-ээс шууд татах
-                jsonUrl: "https://cdn.jsdelivr.net/gh/EsotericSoftware/spine-runtimes@4.1/spine-ts/spine-player/example/assets/spineboy-pro.json",
-                atlasUrl: "https://cdn.jsdelivr.net/gh/EsotericSoftware/spine-runtimes@4.1/spine-ts/spine-player/example/assets/spineboy-pro.atlas",
-                animation: "run",
-                alpha: true,
-                backgroundColor: "#00000000",
-                showControls: false,
-                fullScreenCanvas: false,
-                preserveDrawingBuffer: true
-            });
-        }
 
         // Маркер алга болоход
         targetEl.addEventListener("targetLost", () => {
