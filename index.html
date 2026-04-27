@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+    <script src="https://unpkg.com/@esotericsoftware/spine-player@4.1/dist/iife/spine-player.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@esotericsoftware/spine-player@4.1/dist/spine-player.css">
+
+    <style>
+        body { margin: 0; overflow: hidden; }
+        #spine-container {
+            width: 300px; height: 300px;
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 100; display: none; /* Эхлээд нууна */
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="spine-container"></div>
+
+    <a-scene mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/examples/image-tracking/assets/card-example/card.mind;" 
+             vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+        
+        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+        <a-entity id="ar-target" mindar-image-target="targetIndex: 0"></a-entity>
+    </a-scene>
+
+    <script>
+        const targetEl = document.querySelector('#ar-target');
+        const spineDiv = document.querySelector('#spine-container');
+        let player = null;
+
+        targetEl.addEventListener("targetFound", () => {
+            spineDiv.style.display = "block";
+            if (!player) {
+                player = new spine.SpinePlayer("spine-container", {
+                    jsonUrl: "https://esotericsoftware.com/files/examples/4.1/spineboy/export/spineboy-pro.json",
+                    atlasUrl: "https://esotericsoftware.com/files/examples/4.1/spineboy/export/spineboy-pro.atlas",
+                    animation: "run",
+                    alpha: true,
+                    backgroundColor: "#00000000",
+                    showControls: false
+                });
+            }
+        });
+
+        targetEl.addEventListener("targetLost", () => {
+            spineDiv.style.display = "none";
+        });
+    </script>
+</body>
+</html>
